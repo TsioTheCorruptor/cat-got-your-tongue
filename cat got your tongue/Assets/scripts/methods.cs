@@ -5,12 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class methods : MonoBehaviour
 {
+    public bool destroyon_start;
+    public float destroy_after;
+    public Animator animator;
     public bool change_scene_on_awake;
     public int scene_index;
     public bool gun_type_debug;
     // Start is called before the first frame update
     void Start()
     {
+        if(destroyon_start==true)
+        {
+            Destroy(gameObject, destroy_after);
+        }
         if(change_scene_on_awake==true)
         {
             changescene(scene_index);
@@ -45,5 +52,9 @@ public class methods : MonoBehaviour
    public void setguntype_3()
     {
         static_script.guntype = 3;
+    }
+    void handgun_anim_false()
+    {
+        animator.SetBool("shoot", false);
     }
 }
