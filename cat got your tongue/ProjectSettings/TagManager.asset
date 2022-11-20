@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - handgun_bull
+  - shotgun_bull
+  - cat
+  - ink
   layers:
   - Default
   - TransparentFX

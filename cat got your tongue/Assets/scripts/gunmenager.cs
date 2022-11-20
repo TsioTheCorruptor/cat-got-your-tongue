@@ -5,6 +5,7 @@ using UnityEngine;
 public class gunmenager : MonoBehaviour
 {
     public GameObject handgun_collider;
+    public GameObject shotgun_collider;
     public Transform cursor;
     public Animator handgun_animator;
     public Animator shotgun_animator;
@@ -25,8 +26,8 @@ public class gunmenager : MonoBehaviour
         delaytime += Time.deltaTime;
         mousepos = camera.ScreenToWorldPoint(Input.mousePosition);
         cursor.position = mousepos;
-        handgun_();
-        //shotgun_();
+      //  handgun_();
+        shotgun_();
         
     }
     void handgun_()
@@ -44,7 +45,7 @@ public class gunmenager : MonoBehaviour
         shotgun.transform.position = new Vector2(mousepos.x,shotgun.transform.position.y);
         if (Input.GetMouseButton(0) && delaytime >= 1f)
         {
-            Instantiate(handgun_collider, mousepos, handgun_collider.transform.rotation);
+            Instantiate(shotgun_collider, mousepos, handgun_collider.transform.rotation);
             shotgun_animator.SetBool("shoot", true);
             delaytime = 0;
         }

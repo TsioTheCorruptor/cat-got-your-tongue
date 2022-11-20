@@ -57,4 +57,8 @@ public class methods : MonoBehaviour
     {
         animator.SetBool("shoot", false);
     }
+    public void disable_this()
+    {
+        gameObject.SetActive(false);
+    }
 }
