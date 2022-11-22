@@ -8,6 +8,8 @@ TagManager:
   - shotgun_bull
   - cat
   - ink
+  - bomb
+  - destroy
   layers:
   - Default
   - TransparentFX

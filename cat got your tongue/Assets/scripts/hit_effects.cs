@@ -10,6 +10,8 @@ public class hit_effects : MonoBehaviour
     public TextMeshProUGUI health;
     //int health_count;
     public GameObject ink;
+    public GameObject bomb;
+    public GameObject dizzy_cat;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +35,7 @@ public class hit_effects : MonoBehaviour
         }
         if (collision.tag == "shotgun_bull")
         {
-           static_script.health -= 4;
+           static_script.health -= 5;
             health.text = static_script.health.ToString();
         }
         }
@@ -49,7 +51,42 @@ public class hit_effects : MonoBehaviour
             {
                 ink.SetActive(true);
                 target.enabled = false;
+                target.gameObject.GetComponent<Image>().sprite = brkn_ink;
             }
         }
+        if (gameObject.tag == "bomb")
+        {
+            if (collision.tag == "handgun_bull")
+            {
+                static_script.stop_appearences = true;
+                StartCoroutine(resume(6));
+                bomb.transform.position = transform.position;
+                bomb.SetActive(false);
+                bomb.SetActive(true);
+                target.enabled = false;
+                target.gameObject.GetComponent<Image>().sprite = brkn_ink;
+                Invoke("activate_dizzy", 2);
+            }
+            if (collision.tag == "shotgun_bull")
+            {
+                static_script.stop_appearences = true;
+                StartCoroutine(resume(6));
+                bomb.transform.position = transform.position;
+                bomb.SetActive(false);
+                bomb.SetActive(true);
+               
+                target.enabled = false;
+                Invoke("activate_dizzy", 2);
+            }
+        }
+    }
+    IEnumerator resume(float time)
+    {
+        yield return new WaitForSeconds(time);
+        static_script.stop_appearences = false;
+    }
+    void activate_dizzy()
+    {
+ dizzy_cat.SetActive(true);
     }
 }
