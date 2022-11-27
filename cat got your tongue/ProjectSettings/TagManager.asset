@@ -10,6 +10,7 @@ TagManager:
   - ink
   - bomb
   - destroy
+  - nip
   layers:
   - Default
   - TransparentFX

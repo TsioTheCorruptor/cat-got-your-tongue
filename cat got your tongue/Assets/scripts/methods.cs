@@ -33,7 +33,7 @@ public class methods : MonoBehaviour
 
     // Update is called once per frame
 
-    void changescene(int index)
+   public void changescene(int index)
     {
         SceneManager.LoadScene(index);
     }
@@ -43,15 +43,15 @@ public class methods : MonoBehaviour
     }
    public void setguntype_1()
     {
-        static_script.guntype = 1;
+        static_script.guntype = 0;
     }
    public  void setguntype_2()
     {
-        static_script.guntype = 2;
+        static_script.guntype = 1;
     }
    public void setguntype_3()
     {
-        static_script.guntype = 3;
+        static_script.guntype = 2;
     }
     void handgun_anim_false()
     {

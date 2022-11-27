@@ -11,7 +11,7 @@ public class gunmenager : MonoBehaviour
     public Transform cursor;
     public Animator handgun_animator;
     public Animator shotgun_animator;
-    public Camera camera;
+    public Camera camera__;
   public   Vector2 mousepos;
     public GameObject handgun;
     public GameObject shotgun;
@@ -21,10 +21,12 @@ public class gunmenager : MonoBehaviour
     {
         if(static_script.guntype==0)
         {
+            handgun.SetActive(true);
             static_script.maxbullets = 15;
         }
         if (static_script.guntype == 1)
         {
+            shotgun.SetActive(true);
             static_script.maxbullets = 7;
         }
     }
@@ -36,21 +38,43 @@ public class gunmenager : MonoBehaviour
         {
             static_script.maxbullets = 0;
         }
+        switch(static_script.guntype)
+        {
+            case 0:
+                if(static_script.maxbullets>15)
+                {
+                    static_script.maxbullets = 16;
+                }
+                break;
+            case 1:
+                if(static_script.maxbullets>7)
+                {
+                    static_script.maxbullets = 7;
+                }
+                break;
+        }
         ammo.text = static_script.maxbullets.ToString();
         delaytime += Time.deltaTime;
-        mousepos = camera.ScreenToWorldPoint(Input.mousePosition);
+        mousepos = camera__.ScreenToWorldPoint(Input.mousePosition);
         cursor.position = mousepos;
-        handgun_();
-       // shotgun_();
+        if(static_script.guntype==0)
+        {
+handgun_();
+        }
+     if(static_script.guntype==1)
+        {
+ shotgun_();
+        }
+       
         
     }
     void handgun_()
     {
  handgun.transform.position = new Vector2(mousepos.x, handgun.transform.position.y);
-    if (Input.GetMouseButton(0) && delaytime >= 0.4f)
+    if (Input.GetMouseButton(0) && delaytime >= 0.5f*static_script.gundelay_multiplier)
     {
-            static_script.maxbullets--;
-        Instantiate(handgun_collider, mousepos, handgun_collider.transform.rotation);
+            Invoke("minusbullet", 0.05f);
+            Instantiate(handgun_collider, mousepos, handgun_collider.transform.rotation);
         handgun_animator.SetBool("shoot", true);
             delaytime = 0;
             }
@@ -59,12 +83,16 @@ public class gunmenager : MonoBehaviour
     {
        
         shotgun.transform.position = new Vector2(mousepos.x,shotgun.transform.position.y);
-        if (Input.GetMouseButton(0) && delaytime >= 1f)
+        if (Input.GetMouseButton(0) && delaytime >= 1f*static_script.gundelay_multiplier)
         {
- static_script.maxbullets--;
+            Invoke("minusbullet", 0.05f);
             Instantiate(shotgun_collider, mousepos, handgun_collider.transform.rotation);
             shotgun_animator.SetBool("shoot", true);
             delaytime = 0;
         }
+    }
+    void minusbullet()
+    {
+ static_script.maxbullets--;
     }
 }

@@ -9,7 +9,7 @@ public class spawner : MonoBehaviour
     public GameObject canvas;
     GameObject instantiated;
     float countup;
-    float delay = 5;
+    float delay = 11f;
     public float maxx;
     public float minx;
     float x;

@@ -677,6 +677,7 @@ GameObject:
   - component: {fileID: 915198477}
   - component: {fileID: 915198476}
   - component: {fileID: 915198475}
+  - component: {fileID: 915198478}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -747,7 +748,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 915198476}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 915198478}
+        m_TargetAssemblyTypeName: methods, Assembly-CSharp
+        m_MethodName: changescene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &915198476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,6 +799,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 915198473}
   m_CullTransparentMesh: 1
+--- !u!114 &915198478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915198473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e0582b2da565947b7cf3296616bc53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyon_start: 0
+  destroy_after: 0
+  animator: {fileID: 0}
+  change_scene_on_awake: 0
+  scene_index: 2
+  gun_type_debug: 0
 --- !u!1 &990871617
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,6 +980,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e0582b2da565947b7cf3296616bc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyon_start: 0
+  destroy_after: 0
+  animator: {fileID: 0}
   change_scene_on_awake: 0
   scene_index: 0
   gun_type_debug: 1
@@ -1486,7 +1520,7 @@ RectTransform:
   m_GameObject: {fileID: 2078801506}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 5, z: 1}
+  m_LocalScale: {x: 1.5, y: 5.5, z: 1}
   m_Children:
   - {fileID: 2093775592}
   m_Father: {fileID: 1790188157}
@@ -1494,7 +1528,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 32}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2078801508
@@ -1573,7 +1607,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 38a19fe460bdda24a9a56b447dde9479, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fdf31d535cd19744cb2107be4b8a5e1e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

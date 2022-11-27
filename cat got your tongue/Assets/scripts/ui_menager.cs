@@ -11,6 +11,7 @@ public class ui_menager : MonoBehaviour
     public Sprite ink;
     public Sprite cat;
     public Sprite bomb;
+    public Sprite nip;
     int movetype;
     public GameObject child;
     public BoxCollider2D targetcollider;
@@ -22,14 +23,17 @@ public class ui_menager : MonoBehaviour
     bool startup;
     bool startup2;
     bool startup3;
+    bool startup4;
     bool startdown;
     bool stopup;
     bool do_once=false;
     bool do_once2 = false;
     bool do_once3 = false;
+    bool do_once4 = false;
     float randomdelay;
     float delay_countup;
     float delay_countup2;
+    float delay_countup3;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,20 +43,26 @@ public class ui_menager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-        Debug.Log(static_script.cats_available);
+      
+        //Debug.Log(static_script.cats_available);
  randomdelay = Random.Range(3.0f, 5.0f);
         if(static_script.stop_appearences==false)
         {
 delay_countup += Time.deltaTime;
         delay_countup2 += Time.deltaTime;
+            delay_countup3 += Time.deltaTime;
         }
         
-        if(delay_countup2>=1&&startup!=true&&startup2!=true&&startup3!=true)
+        if(delay_countup2>=1&&startup!=true&&startup2!=true&&startup3!=true&&startup4!=true)
         {
             appeartype = Random.Range(0, 200);
             appeartype2 = Random.Range(0, 100);
             delay_countup2 = 0;
+            if(delay_countup3>=5.5f*static_script.cat_spawn_delay_multiplier)
+            {
+                appeartype = 181;
+                delay_countup3 = 0;
+            }
         }
         if(delay_countup>=randomdelay)
         {
@@ -77,12 +87,12 @@ delay_countup += Time.deltaTime;
             }
             else
             { 
-            StartCoroutine(godown_hide(stay_up_for,uptype));
+            StartCoroutine(godown_hide(stay_up_for*static_script.stay_up_for_multiplier,uptype));
            }
             }
             }
 
-            if ((appeartype>5&&appeartype<89) || startup2 == true)
+            if ((appeartype>20&&appeartype<89) || startup2 == true)
             {
                 movetype = 2;
                 if(movetype==2)
@@ -100,7 +110,7 @@ delay_countup += Time.deltaTime;
                 }
                 else
                 {
-                    StartCoroutine(godown_hide(stay_up_for, uptype));
+                    StartCoroutine(godown_hide(stay_up_for*static_script.stay_up_for_multiplier, uptype));
                 }
                 }
             }
@@ -122,7 +132,29 @@ delay_countup += Time.deltaTime;
                     }
                     else
                     {
-                        StartCoroutine(godown_hide(stay_up_for, uptype));
+                        StartCoroutine(godown_hide(stay_up_for*static_script.stay_up_for_multiplier, uptype));
+                    }
+                }
+            }
+            if (appeartype > 6&&appeartype<=16&&static_script.catnip_enabled==true || startup4 == true)
+            {
+                movetype = 4;
+                if (movetype == 4)
+                {
+                    if (do_once4 == false)
+                    {
+                        sr.sprite =nip;
+                        do_once4 = true;
+                    }
+                    child.tag = "nip";
+                    startup4 = true;
+                    if (upvalue < move_sum && stopup == false)
+                    {
+                        StartCoroutine(goup(0, uptype));
+                    }
+                    else
+                    {
+                        StartCoroutine(godown_hide(stay_up_for*static_script.stay_up_for_multiplier, uptype));
                     }
                 }
             }
@@ -136,7 +168,7 @@ delay_countup += Time.deltaTime;
     {
         yield return new WaitForSeconds(time2);
         targetcollider.enabled = true;
-upvalue += appearspeed * Time.deltaTime;
+upvalue += appearspeed * Time.smoothDeltaTime;
         if(upvalue>move_sum)
         {
             upvalue = move_sum;
@@ -172,7 +204,7 @@ upvalue += appearspeed * Time.deltaTime;
             {
                 startdown = true;
                 stopup = true;
-                upvalue -= appearspeed * Time.deltaTime;
+                upvalue -= appearspeed * Time.smoothDeltaTime;
             if(upvalue<0)
             {
                 upvalue = 0;
@@ -201,17 +233,24 @@ transform.position=new Vector2(transform.position.x,transform.position.y-(appear
                     static_script.cats_available++;
                 }
                 targetcollider.enabled = false;
-                    startup = false;
-                startup2 = false;
+                  
+               
                     stopup = false;
                     startdown = false;
                 delay_countup = 0;
+                delay_countup3 = 0;
                 movetype = 0;
                 appeartype = 0;
-                do_once = false;
-                do_once2 = false;
-                do_once3 = false;
+               
+                
+ startup2 = false;
+  startup = false;
                 startup3 = false;
+                startup4 = false;
+ do_once = false;
+do_once2 = false;
+                do_once3 = false;
+                do_once4 = false;
 
             }
             }

@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/gun_select.unity
     guid: d50a967fe7c19914888200a46c38fd49
+  - enabled: 1
+    path: Assets/Scenes/game.unity
+    guid: de0d370b7a315fe49af94aa3e2356ad2
   m_configObjects: {}

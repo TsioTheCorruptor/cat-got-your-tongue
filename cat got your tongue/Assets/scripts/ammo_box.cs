@@ -19,15 +19,21 @@ public class ammo_box : MonoBehaviour
     {
         if(collision.tag=="handgun_bull")
         {
-            static_script.maxbullets += 3;
+            static_script.maxbullets += 7;
+            destroy_box();
         }
         if (collision.tag == "shotgun_bull")
         {
-            static_script.maxbullets += 2;
+            static_script.maxbullets += 4;
+            destroy_box();
         }
         if(collision.tag=="destroy")
         {
             Destroy(gameObject, 0);
         }
+    }
+    private void destroy_box()
+    {
+        Destroy(gameObject, 0);
     }
 }
