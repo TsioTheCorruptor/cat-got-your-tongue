@@ -6,6 +6,8 @@ using TMPro;
 using UnityEngine.UI;
 public class ending_menager : MonoBehaviour
 {
+    public AudioSource aus;
+    public List<AudioClip> sounds = new List<AudioClip>();
     int endtype=-1;
     public GameObject fadescreen;
     public GameObject b_ending;
@@ -14,9 +16,12 @@ public class ending_menager : MonoBehaviour
     public GameObject g_ending;
     public List<GameObject> tongues = new List<GameObject>();
     bool once=false;
+    public GameObject bopper;
+    bool[] onces = new bool[99];
     // Start is called before the first frame update
     void Start()
     {
+        Invoke("enablebop", 32.3f);
         static_script.time = 0;
          static_script. health = 150;
    static_script. cats_available = 1;
@@ -57,9 +62,21 @@ time.text = gametime.ToString("#.#");
         switch(endtype)
         {
             case 0:
+                if(onces[0]!=true)
+                {
+aus.PlayOneShot(sounds[1]);
+                    onces[0] = true;
+                }
+                static_script.stop_appearences = true;
                 StartCoroutine(ending(1.5f, g_ending, 2));
                 break;
             case 1:
+                if (onces[1] != true)
+                {
+                    aus.PlayOneShot(sounds[0]);
+                    onces[1] = true;
+                }
+                static_script.stop_appearences = true;
                 StartCoroutine(ending(1.5f, b_ending, 2));
                 break;
             case -1:
@@ -96,5 +113,9 @@ time.text = gametime.ToString("#.#");
     void end_()
     {
         SceneManager.LoadScene(1);
+    }
+    void enablebop()
+    {
+        bopper.SetActive(true);
     }
 }

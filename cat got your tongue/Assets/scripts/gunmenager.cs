@@ -5,6 +5,8 @@ using TMPro;
 
 public class gunmenager : MonoBehaviour
 {
+    public AudioSource aus;
+    public List<AudioClip> sounds = new List<AudioClip>();
     public TextMeshProUGUI ammo;
     public GameObject handgun_collider;
     public GameObject shotgun_collider;
@@ -73,6 +75,7 @@ handgun_();
  handgun.transform.position = new Vector2(mousepos.x, handgun.transform.position.y);
     if (Input.GetMouseButton(0) && delaytime >= 0.5f*static_script.gundelay_multiplier)
     {
+            aus.PlayOneShot(sounds[0]);
             Invoke("minusbullet", 0.05f);
             Instantiate(handgun_collider, mousepos, handgun_collider.transform.rotation);
         handgun_animator.SetBool("shoot", true);
@@ -85,6 +88,7 @@ handgun_();
         shotgun.transform.position = new Vector2(mousepos.x,shotgun.transform.position.y);
         if (Input.GetMouseButton(0) && delaytime >= 1f*static_script.gundelay_multiplier)
         {
+            aus.PlayOneShot(sounds[1]);
             Invoke("minusbullet", 0.05f);
             Instantiate(shotgun_collider, mousepos, handgun_collider.transform.rotation);
             shotgun_animator.SetBool("shoot", true);

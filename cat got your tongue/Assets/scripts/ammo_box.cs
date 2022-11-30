@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ammo_box : MonoBehaviour
 {
+    public AudioSource aus;
+    public AudioClip box;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +21,13 @@ public class ammo_box : MonoBehaviour
     {
         if(collision.tag=="handgun_bull")
         {
+            aus.PlayOneShot(box);
             static_script.maxbullets += 7;
             destroy_box();
         }
         if (collision.tag == "shotgun_bull")
         {
+            aus.PlayOneShot(box);
             static_script.maxbullets += 4;
             destroy_box();
         }

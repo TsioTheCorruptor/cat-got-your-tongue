@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine.UI;
 public class hit_effects : MonoBehaviour
 {
+    public AudioSource aus;
+    public List<AudioClip> sounds = new List<AudioClip>();
     public Sprite brkn_ink;
     public Sprite brkn_nip;
     public BoxCollider2D target;
@@ -45,6 +47,7 @@ public class hit_effects : MonoBehaviour
         {
             if (collision.tag == "handgun_bull")
             {
+                aus.PlayOneShot(sounds[0]);
                 ink.SetActive(true);
                 target.enabled = false;
                 target.gameObject.GetComponent<Image>().sprite = brkn_ink;
@@ -52,6 +55,7 @@ public class hit_effects : MonoBehaviour
             }
             if (collision.tag == "shotgun_bull")
             {
+                aus.PlayOneShot(sounds[0]);
                 ink.SetActive(true);
                 target.enabled = false;
                 target.gameObject.GetComponent<Image>().sprite = brkn_ink;
@@ -62,6 +66,7 @@ public class hit_effects : MonoBehaviour
         {
             if (collision.tag == "handgun_bull")
             {
+                aus.PlayOneShot(sounds[1]);
                 static_script.stop_appearences = true;
                 StartCoroutine(resume(6));
                 bomb.transform.position = transform.position;
@@ -73,6 +78,7 @@ public class hit_effects : MonoBehaviour
             }
             if (collision.tag == "shotgun_bull")
             {
+                aus.PlayOneShot(sounds[1]);
                 static_script.stop_appearences = true;
                 StartCoroutine(resume(6));
                 bomb.transform.position = transform.position;
@@ -94,6 +100,7 @@ public class hit_effects : MonoBehaviour
         {
             if (collision.tag == "handgun_bull")
             {
+                aus.PlayOneShot(sounds[0]);
                 target.gameObject.GetComponent<Image>().sprite = brkn_nip;
                 StartCoroutine(change_catdelay(5, 0.1f));
                 StartCoroutine(upg_texts(5, nip_text));
@@ -102,6 +109,7 @@ public class hit_effects : MonoBehaviour
             }
             if (collision.tag == "shotgun_bull")
             {
+                aus.PlayOneShot(sounds[0]);
                 target.gameObject.GetComponent<Image>().sprite = brkn_nip;
                 StartCoroutine(change_catdelay(5, 0.1f));
                 StartCoroutine(upg_texts(5, nip_text));
